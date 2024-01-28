@@ -1,2 +1,2 @@
-# chatgpt_tg_bot
-simple chatgpt telegram bot
+# CHATGPT TELEGRAM BOT
+Simple ChatGPT Telegram Bot based on gpt4free.
