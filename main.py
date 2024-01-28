@@ -36,7 +36,7 @@ async def process_clear_command(message: types.Message):
     await message.reply("Dialog history deleted.")
 
 @dp.message(Command("help"))
-async def process_clear_command(message: types.Message):
+async def bot_info_details(message: types.Message):
     await message.answer("""
 This bot has some limitations with 4096 max tokens. If you exceed this number please use /clear command.
 
