@@ -3,20 +3,20 @@ from aiogram import Bot, Dispatcher, types
 import g4f
 from aiogram.filters.command import Command
 import asyncio
+# from curl_cffi import requests
 
-
-# Logging on
+# Включите логирование
 logging.basicConfig(level=logging.INFO)
 
-# Bot init
-API_TOKEN = 'INSERT YOUR TOKEN HERE'
+# Инициализация бота
+API_TOKEN = '6477962823:AAFr2SHtUCn6ZYcp8q2IVxLSQxgxGcm_hq4'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
-# Dict for chat history
+# Словарь для хранения истории разговоров
 conversation_history = {}
 
-# Function for trim chat history
+# Функция для обрезки истории разговора
 def trim_history(history, max_length=4096):
     current_length = sum(len(message["content"]) for message in history)
     while history and current_length > max_length:
@@ -47,7 +47,7 @@ It uses ChatGPT 3.5 model and gpt4free library, so sometimes it can be unstable 
 If you have any questions, please dm me: @shdsgm
     """)
 
-# Handler for every new message
+# Обработчик для каждого нового сообщения
 @dp.message()
 async def send_welcome(message: types.Message):
     user_id = message.from_user.id
@@ -65,11 +65,11 @@ async def send_welcome(message: types.Message):
         response = await g4f.ChatCompletion.create_async(
             model=g4f.models.default,
             messages=chat_history,
-            provider=g4f.Provider.GeekGpt,
+            provider=g4f.Provider.You,
         )
         chat_gpt_response = response
     except Exception as e:
-        print(f"{g4f.Provider.GeekGpt.__name__}:", e)
+        print(f"{g4f.Provider.You.__name__}:", e)
         chat_gpt_response = "Sorry. Error occurred. Please try again or later. "
 
     conversation_history[user_id].append({"role": "assistant", "content": chat_gpt_response})
