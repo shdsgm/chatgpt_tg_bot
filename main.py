@@ -84,7 +84,7 @@ async def send_welcome(message: types.Message):
         response = await g4f.ChatCompletion.create_async(
             model=g4f.models.default,
             messages=chat_history,
-            provider=g4f.Provider.ChatBase,
+            provider=g4f.Provider.Liaobots,
         )
         chat_gpt_response = response
     except Exception as e:
