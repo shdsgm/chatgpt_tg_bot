@@ -5,15 +5,15 @@ from aiogram.filters.command import Command
 import asyncio
 import sqlite3
 
-# Включите логирование
+# Logging
 logging.basicConfig(level=logging.INFO)
 
-# Инициализация бота
+# Bot initialization
 API_TOKEN = 'YOUR TOKEN HERE'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
-# Словарь для хранения истории разговоров
+# Conversation history
 conversation_history = {}
 
 # Initialize SQLite database and create a table if not exists
@@ -34,7 +34,7 @@ def get_conversation_history(user_id):
     c.execute("SELECT role, content FROM conversation_history WHERE user_id=?", (user_id,))
     return c.fetchall()
 
-# Функция для обрезки истории разговора
+# History cut
 def trim_history(history, max_length=4096):
     current_length = sum(len(message["content"]) for message in history)
     while history and current_length > max_length:
@@ -66,7 +66,7 @@ It uses ChatGPT 3.5 model and gpt4free library, so sometimes it can be unstable 
 If you have any questions, please dm me: @shdsgm
     """)
 
-# Обработчик для каждого нового сообщения
+# Message handler
 @dp.message()
 async def send_welcome(message: types.Message):
     user_id = message.from_user.id
